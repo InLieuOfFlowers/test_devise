@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TestDevise</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<header class="page-header">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<ul class="nav">
+					<% if user_signed_in? %>
+						<li class="divider-vertical">
+							Signed in as <%= current_user.email %>.	Not you?
+						</li>
+						<li class="divider-vertical">
+							<%= link_to "Sign out",  
+							destroy_user_session_path, :method => :delete %>
+						</li>
+						<li class="divider-vertical">
+							<%= link_to "edit info", edit_user_registration_path %>
+						</li>
+					<% else %>
+						<li class="divider-vertical">
+							<%= link_to "sign up", new_user_registration_path %>
+						</li>
+						<li class="divider-vertical">
+							<%= link_to "sign in", new_user_session_path %>
+						</li>						
+					<% end %>
+				</ul>
+			</div>
+		</div>		
+	</header>
+	<% if alert || notice %>
+	<div class="alert">
+			<%= notice %>
+			<%= alert %>
+	</div>
+	<% end %>
+	<div class="hero-unit">
+		<%= yield %>
+	</div>
+</body>
+</html>
